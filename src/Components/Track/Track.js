@@ -89,7 +89,7 @@ export default class Track extends React.Component {
         </div>
         <audio controls="controls" style={this.state.playerStyle}>
             <source src={ this.props.track.preview } type="audio/mpeg" />
-          Your browser does not support the audio element.
+            Your browser does not support the audio element.
         </audio>
         <a className="Track-action" onClick= { this.togglePlayer } > { hasPreview } </a>
         <a className="Track-action"> { renderAction } </a>
