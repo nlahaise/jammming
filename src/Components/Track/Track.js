@@ -6,24 +6,43 @@ export default class Track extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      playerVisible:false,
       playerStyle: {
         display: 'none'
       },
     }
 
+
+    // bind this to functions here
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
     this.togglePlayer = this.togglePlayer.bind(this);
   }
 
-    addTrack(){
+
+  /*
+    function calls addOn function in app
+    returns none
+   */
+  addTrack(){
     this.props.addOn(this.props.track);
   }
 
+
+  /*
+    function calls onRemove function in app
+    returns none
+   */
   removeTrack(){
     this.props.onRemove(this.props.track);
   }
 
+
+  /*
+    function toggles visibility of the preview audio
+    returns none
+    sets state.playerStyle value
+   */
   togglePlayer(){
     this.setState({ playerVisible:!this.state.playerVisible }); //toggle the value of state playerVisible **  true or false  **
     if (this.state.playerVisible){
@@ -33,6 +52,8 @@ export default class Track extends React.Component {
     }
   }
 
+
+  // render return
   render(){
     const track = this.props.track;
 
@@ -50,6 +71,7 @@ export default class Track extends React.Component {
       <span className='Track-action' ></span>
     )
 
+    //test if the track has albumArt **  spotify icon on albumArt image  **
     const hasAlbumArt = track.albumArt ? (
       <img className="albumArt" src={ track.albumArt } width="64px" height="64px" alt={ track.album }/>
     ) : (
@@ -57,7 +79,7 @@ export default class Track extends React.Component {
     )
 
 
-    //render return
+    //return
     return(
       <div className="Track">
         { hasAlbumArt }
@@ -68,7 +90,7 @@ export default class Track extends React.Component {
         <audio controls="controls" style={this.state.playerStyle}>
             <source src={ this.props.track.preview } type="audio/mpeg" />
           Your browser does not support the audio element.
-          </audio>
+        </audio>
         <a className="Track-action" onClick= { this.togglePlayer } > { hasPreview } </a>
         <a className="Track-action"> { renderAction } </a>
       </div>
